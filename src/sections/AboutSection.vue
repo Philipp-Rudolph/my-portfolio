@@ -1,0 +1,152 @@
+<template>
+  <section id="about" class="about">
+    <div class="container">
+      <h2 class="section-title">Über mich</h2>
+      <div class="about-content">
+        <div class="about-image">
+          <img src="/placeholder-profile.jpg" alt="Profilbild" @error="handleImageError">
+        </div>
+        <div class="about-text">
+          <p>
+            Ich bin ein leidenschaftlicher Junior Web Entwickler mit 3 Jahren Erfahrung im Bereich der Webentwicklung.
+            Nach meinem Studium habe ich in einem Unternehmen meine Karriere begonnen und dort an verschiedenen
+            spannenden Projekten gearbeitet.
+          </p>
+          <p>
+            Mein Fokus liegt auf der Entwicklung von modernen, responsiven und benutzerfreundlichen Websites und
+            Webanwendungen. Dabei lege ich großen Wert auf sauberen, wartbaren Code und eine optimale Performance.
+          </p>
+          <p>
+            Neben meiner Tätigkeit im Unternehmen habe ich auch als Freelancer verschiedene Projekte umgesetzt und
+            konnte so meine Fähigkeiten weiter ausbauen und vielseitige Erfahrungen sammeln.
+          </p>
+          <div class="skills">
+            <div class="skill">HTML5</div>
+            <div class="skill">CSS3</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">Vue.js</div>
+            <div class="skill">Nuxt.js</div>
+            <div class="skill">Tailwind CSS</div>
+            <div class="skill">SCSS</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">Express</div>
+            <div class="skill">MongoDB</div>
+            <div class="skill">Git</div>
+            <div class="skill">Responsive Design</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
+<script setup>
+import { onMounted, onUnmounted } from 'vue';
+import { isElementInViewport, animateOnScroll } from '../utils/animations';
+
+// Fallback für Bilder, die nicht geladen werden können
+const handleImageError = (event) => {
+  event.target.src = '/placeholder-image.jpg'; // Stelle sicher, dass du dieses Bild hast
+};
+
+// Abschnittsanimation
+const animateAboutSection = () => {
+  const aboutImage = document.querySelector('.about-image');
+  const aboutText = document.querySelector('.about-text');
+  
+  if (aboutImage) animateOnScroll(aboutImage);
+  if (aboutText) animateOnScroll(aboutText);
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', animateAboutSection);
+  // Initial-Check
+  setTimeout(animateAboutSection, 1000);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', animateAboutSection);
+});
+</script>
+
+<style scoped>
+.about {
+  padding: 8rem 0;
+  position: relative;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.about-image {
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(50px);
+  opacity: 0;
+  height: 400px; /* Feste Höhe für den Fall, dass kein Bild vorhanden ist */
+  background-color: rgba(45, 212, 191, 0.05); /* Hintergrundfarbe als Platzhalter */
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+  object-fit: cover;
+}
+
+.about-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-text {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.about-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+  color: var(--gray);
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.skill {
+  padding: 0.5rem 1.2rem;
+  background-color: rgba(45, 212, 191, 0.1);
+  border-radius: 20px;
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.skill:hover {
+  transform: translateY(-5px);
+  background-color: rgba(45, 212, 191, 0.2);
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 992px) {
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .about-image {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}
+</style>

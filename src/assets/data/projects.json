@@ -1,0 +1,34 @@
+[
+  {
+    "title": "E-Commerce Website",
+    "description": "Ein moderner Online-Shop mit Warenkorb-Funktionalität, Benutzerprofilen und Zahlungsabwicklung.",
+    "image": "/api/placeholder/600/400",
+    "technologies": ["Vue.js", "Nuxt.js", "Node.js", "MongoDB"],
+    "demoLink": "#",
+    "codeLink": "#"
+  },
+  {
+    "title": "Dashboard Application",
+    "description": "Ein interaktives Dashboard zur Datenvisualisierung mit umfassenden Filtermöglichkeiten und Echtzeit-Updates.",
+    "image": "/api/placeholder/600/400",
+    "technologies": ["Vue.js", "Vuex", "Chart.js", "Firebase"],
+    "demoLink": "#",
+    "codeLink": "#"
+  },
+  {
+    "title": "Unternehmenswebsite",
+    "description": "Responsive Website für ein lokales Unternehmen mit modernem Design und benutzerfreundlichem Content-Management-System.",
+    "image": "/api/placeholder/600/400",
+    "technologies": ["Vue.js", "Tailwind CSS", "Headless CMS", "Netlify"],
+    "demoLink": "#",
+    "codeLink": "#"
+  },
+  {
+    "title": "Task-Management-App",
+    "description": "Eine Produktivitäts-App für Teams mit Echtzeit-Kollaboration, Aufgabenzuweisung und Fortschrittsverfolgung.",
+    "image": "/api/placeholder/600/400",
+    "technologies": ["Vue.js", "Vuex", "Socket.io", "Express.js"],
+    "demoLink": "#",
+    "codeLink": "#"
+  }
+]

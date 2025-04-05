@@ -1,0 +1,26 @@
+[
+  {
+    "date": "Jan 2022 - Heute",
+    "title": "Web Entwickler",
+    "company": "Technologiefirma GmbH",
+    "description": "Entwicklung und Wartung von Unternehmenswebseiten und Webanwendungen. Implementierung neuer Features und Optimierung der Benutzeroberfläche für verbesserte User Experience."
+  },
+  {
+    "date": "Mai 2021 - Dez 2021",
+    "title": "Junior Frontend Entwickler",
+    "company": "Agentur Digital",
+    "description": "Zusammenarbeit mit dem Design-Team zur Umsetzung von Wireframes und Designs. Entwicklung responsiver Webseiten mit Vue.js und Integration von Backend-APIs."
+  },
+  {
+    "date": "Jan 2020 - Apr 2021",
+    "title": "Praktikant Webentwicklung",
+    "company": "StartUp Innovations",
+    "description": "Unterstützung bei der Implementierung von Frontend-Komponenten. Erlernen von Best Practices in der Webentwicklung und Verbesserung der technischen Fähigkeiten."
+  },
+  {
+    "date": "Sep 2019 - Dez 2019",
+    "title": "Freelance Web Entwickler",
+    "company": "Selbstständig",
+    "description": "Entwicklung maßgeschneiderter Websites für kleine Unternehmen und Einzelpersonen. Enge Zusammenarbeit mit Kunden zur Umsetzung ihrer Anforderungen und Visionen."
+  }
+]
