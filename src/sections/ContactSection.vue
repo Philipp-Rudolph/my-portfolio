@@ -10,15 +10,15 @@
           </p>
           <div class="contact-method">
             <div class="contact-icon">✉</div>
-            <a href="mailto:deine.email@beispiel.de">deine.email@beispiel.de</a>
+            <a href="mailto:deine.email@beispiel.de">me@philipp-rudolph.dev</a>
           </div>
-          <div class="contact-method">
+          <!-- <div class="contact-method">
             <div class="contact-icon">☎</div>
             <a href="tel:+491234567890">+49 1234 567890</a>
-          </div>
+          </div> -->
           <div class="contact-method">
             <div class="contact-icon">📍</div>
-            <span>Berlin, Deutschland</span>
+            <span>Köln, Deutschland</span>
           </div>
         </div>
         <div class="contact-form">
@@ -57,6 +57,20 @@ const formData = reactive({
 // Formular absenden
 const submitForm = () => {
   // Hier würde normalerweise der Code für das Senden des Formulars stehen
+  // Zum Beispiel mit Axios oder Fetch API
+  // axios.post('/api/contact', formData)
+  //   .then(response => {
+  //     alert('Vielen Dank! Deine Nachricht wurde gesendet.');
+  //     formData.name = '';
+  //     formData.email = '';
+  //     formData.subject = '';
+  //     formData.message = '';
+  //   })
+  //   .catch(error => {
+  //     console.error('Fehler beim Senden der Nachricht:', error);
+  //     alert('Es gab ein Problem beim Senden deiner Nachricht. Bitte versuche es später erneut.');
+  //   });
+
   alert(`Vielen Dank, ${formData.name}! Deine Nachricht wurde gesendet.`);
   formData.name = '';
   formData.email = '';

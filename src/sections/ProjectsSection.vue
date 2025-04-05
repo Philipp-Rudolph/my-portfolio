@@ -8,7 +8,7 @@
             <img :src="project.image" :alt="project.title" @error="handleImageError">
             <div class="project-hover-overlay">
               <div class="project-links overlay-links">
-                <a :href="project.demoLink" class="project-demo">Live Demo</a>
+                <a :href="project.demoLink" target="_blank" class="project-demo">Live Demo</a>
               </div>
             </div>
           </div>
@@ -20,10 +20,10 @@
                 {{ tech }}{{ i < project.technologies.length - 1 ? ' • ' : '' }}
               </span>
             </div>
-            <div class="project-links">
+            <!-- <div class="project-links">
               <a :href="project.demoLink" class="project-demo">Live Demo</a>
               <a :href="project.codeLink" class="project-code">Code</a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

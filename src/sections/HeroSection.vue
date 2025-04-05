@@ -2,7 +2,7 @@
   <section id="home" class="hero">
     <div class="container">
       <div class="hero-content">
-        <div class="hero-greeting">Hallo, ich bin</div>
+        <div class="hero-greeting">Hallo, ich bin Philipp</div>
         <h1>Junior Web <br><span class="typing-container"><span ref="typingElement" class="typing-effect"></span></span></h1>
         <div class="hero-description">
           Mit 3 Jahren Erfahrung in der Webentwicklung kreiere ich moderne, responsive und benutzerfreundliche
@@ -33,7 +33,7 @@ let animationFrameId = null; // Für das Cleanup von requestAnimationFrame
 
 // Partikel erstellen
 const createParticles = () => {
-  const numParticles = 50;
+  const numParticles = 100;
   const heroSection = document.querySelector('.hero');
   if (!heroSection) return;
   
@@ -45,7 +45,7 @@ const createParticles = () => {
       x: Math.random() * width,
       y: Math.random() * height,
       size: Math.random() * 3 + 1,
-      opacity: Math.random() * 0.5 + 0.1,
+      opacity: Math.random() * 0.5 + 0.2,
     });
   }
 };
@@ -70,7 +70,24 @@ const animateParticles = () => {
 const typeWriter = () => {
   if (!typingElement.value) return;
   
-  const words = ['Entwickler', 'Designer', 'Creator', 'Problem-Solver'];
+  const words = [
+    'Entwickler', 
+    'Designer', 
+    'Creator', 
+    'Problem-Solver',
+    'Frontend-Spezialist',
+    'Code-Enthusiast',
+    'UI-Gestalter',
+    'Web-Architekt',
+    'Full-Stack-Talent',
+    'Digitalhandwerker',
+    'Innovator',
+    'Tech-Künstler',
+    'JavaScript-Fan',
+    'Vue-Virtuose',
+    'CSS-Magier'
+  ];
+  
   let wordIndex = 0;
   let charIndex = 0;
   let isDeleting = false;

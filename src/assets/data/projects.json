@@ -1,34 +1,26 @@
 [
   {
-    "title": "E-Commerce Website",
-    "description": "Ein moderner Online-Shop mit Warenkorb-Funktionalität, Benutzerprofilen und Zahlungsabwicklung.",
+    "title": "Waking Up In Stereo - Relaunch",
+    "description": "Relaunch der Website für die Band Waking Up In Stereo mit neuem Design und verbesserter Benutzererfahrung.",
     "image": "/api/placeholder/600/400",
-    "technologies": ["Vue.js", "Nuxt.js", "Node.js", "MongoDB"],
-    "demoLink": "#",
+    "technologies": ["Kirby CMS", "PHP", "HTML", "CSS", "JavaScript", "Docker"],
+    "demoLink": "https://www.wakingupinstereo.com",
     "codeLink": "#"
   },
   {
-    "title": "Dashboard Application",
-    "description": "Ein interaktives Dashboard zur Datenvisualisierung mit umfassenden Filtermöglichkeiten und Echtzeit-Updates.",
+    "title": "KVB Access - Barrierefreier Nahverkehr",
+    "description": "Entwicklung einer Webanwendung zur Unterstützung von Menschen mit Behinderungen bei der Nutzung des öffentlichen Nahverkehrs in Köln.",
     "image": "/api/placeholder/600/400",
-    "technologies": ["Vue.js", "Vuex", "Chart.js", "Firebase"],
-    "demoLink": "#",
+    "technologies": ["Vue.js", "Leaflet", "Docker", "reverse proxy"],
+    "demoLink": "https://www.kvb-access.de",
     "codeLink": "#"
   },
   {
-    "title": "Unternehmenswebsite",
-    "description": "Responsive Website für ein lokales Unternehmen mit modernem Design und benutzerfreundlichem Content-Management-System.",
+    "title": "Rosa Köln - Landingpage",
+    "description": "Entwicklung einer Landingpage für die Cocktailbar Rosa Köln mit Fokus auf Benutzerfreundlichkeit und ansprechendem Design.",
     "image": "/api/placeholder/600/400",
-    "technologies": ["Vue.js", "Tailwind CSS", "Headless CMS", "Netlify"],
-    "demoLink": "#",
-    "codeLink": "#"
-  },
-  {
-    "title": "Task-Management-App",
-    "description": "Eine Produktivitäts-App für Teams mit Echtzeit-Kollaboration, Aufgabenzuweisung und Fortschrittsverfolgung.",
-    "image": "/api/placeholder/600/400",
-    "technologies": ["Vue.js", "Vuex", "Socket.io", "Express.js"],
-    "demoLink": "#",
+    "technologies": ["Kirby CMS", "HTML", "CSS", "JavaScript", "Docker"],
+    "demoLink": "https://www.rosa-koeln.de",
     "codeLink": "#"
   }
 ]
