@@ -4,7 +4,7 @@
       <h2 class="section-title">Über mich</h2>
       <div class="about-content">
         <div class="about-image">
-          <img src="/placeholder-profile.jpg" alt="Profilbild" @error="handleImageError">
+          <img src="/philipp-profile.jpg" alt="Profilbild" @error="handleImageError">
         </div>
         <div class="about-text">
           <p>
@@ -88,20 +88,22 @@ onUnmounted(() => {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   transform: translateY(50px);
   opacity: 0;
-  height: 400px; /* Feste Höhe für den Fall, dass kein Bild vorhanden ist */
-  background-color: rgba(45, 212, 191, 0.05); /* Hintergrundfarbe als Platzhalter */
+  height: 400px;
+  background-color: rgba(45, 212, 191, 0.05); 
 }
 
 .about-image img {
   width: 100%;
   height: 100%;
   display: block;
-  transition: transform 0.5s ease;
+  transition: all 0.5s ease;
   object-fit: cover;
+  filter: grayscale(1) brightness(0.8);
 }
 
 .about-image:hover img {
   transform: scale(1.05);
+  filter: grayscale(0);
 }
 
 .about-text {

@@ -4,11 +4,31 @@
       <nav>
         <div class="logo">Portfolio.</div>
         <div class="nav-links" :class="{ 'active': mobileMenuOpen }">
-          <a href="#home" @click.prevent="scrollToSection('home')">Home</a>
-          <a href="#about" @click.prevent="scrollToSection('about')">Über mich</a>
-          <a href="#projects" @click.prevent="scrollToSection('projects')">Projekte</a>
-          <a href="#experience" @click.prevent="scrollToSection('experience')">Erfahrung</a>
-          <a href="#contact" @click.prevent="scrollToSection('contact')">Kontakt</a>
+          <a
+            href="#home"
+            @click.prevent="scrollToSection('home')"
+            :class="{ 'active-link': activeSection === 'home' }"
+          >Home</a>
+          <a
+            href="#about"
+            @click.prevent="scrollToSection('about')"
+            :class="{ 'active-link': activeSection === 'about' }"
+          >Über mich</a>
+          <a
+            href="#projects"
+            @click.prevent="scrollToSection('projects')"
+            :class="{ 'active-link': activeSection === 'projects' }"
+          >Projekte</a>
+          <a
+            href="#experience"
+            @click.prevent="scrollToSection('experience')"
+            :class="{ 'active-link': activeSection === 'experience' }"
+          >Erfahrung</a>
+          <a
+            href="#contact"
+            @click.prevent="scrollToSection('contact')"
+            :class="{ 'active-link': activeSection === 'contact' }"
+          >Kontakt</a>
         </div>
         <button class="mobile-menu-btn" @click.stop="toggleMobileMenu" aria-label="Menü öffnen">☰</button>
       </nav>
@@ -17,13 +37,16 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue';
+import { ref, defineProps, onMounted, onUnmounted } from 'vue';
 
 defineProps({
   scrolled: Boolean
 });
 
 const mobileMenuOpen = ref(false);
+const activeSection = ref('home'); // Default aktive Sektion
+const sections = ['home', 'about', 'projects', 'experience', 'contact'];
+let scrollListener = null;
 
 // Mobile-Menü umschalten
 const toggleMobileMenu = () => {
@@ -38,9 +61,62 @@ const scrollToSection = (sectionId) => {
       top: element.offsetTop - 80,
       behavior: 'smooth',
     });
+    activeSection.value = sectionId; // Setze aktive Sektion beim Klicken
   }
   mobileMenuOpen.value = false;
 };
+
+// Bestimme die aktive Sektion basierend auf dem Viewport
+const determineActiveSection = () => {
+  // Offset für die Header-Höhe und einen kleinen Puffer
+  const offset = 100;
+  
+  // Spezieller Check für das Ende der Seite
+  const scrollPosition = window.scrollY + window.innerHeight;
+  const bodyHeight = document.body.offsetHeight;
+  
+  // Wenn wir nahe am Ende der Seite sind (innerhalb von 50px), aktiviere die Kontaktsektion
+  if (scrollPosition >= bodyHeight - 50) {
+    activeSection.value = 'contact';
+    return;
+  }
+  
+  // Prüfe jede Sektion von unten nach oben
+  for (let i = sections.length - 1; i >= 0; i--) {
+    const section = document.getElementById(sections[i]);
+    
+    if (section) {
+      const rect = section.getBoundingClientRect();
+      
+      // Wenn der obere Teil der Sektion im oder über dem Viewport ist
+      if (rect.top <= offset) {
+        activeSection.value = sections[i];
+        return;
+      }
+    }
+  }
+  
+  // Fallback: Erste Sektion ist aktiv, wenn keine andere gefunden wurde
+  activeSection.value = sections[0];
+};
+
+onMounted(() => {
+  // Event-Listener für das Scrollen
+  scrollListener = () => {
+    determineActiveSection();
+  };
+  window.addEventListener('scroll', scrollListener);
+  
+  // Initial aktive Sektion bestimmen
+  determineActiveSection();
+});
+
+onUnmounted(() => {
+  // Event-Listener entfernen
+  if (scrollListener) {
+    window.removeEventListener('scroll', scrollListener);
+  }
+});
 </script>
 
 <style scoped>
@@ -102,8 +178,13 @@ nav {
   transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
   width: 100%;
+}
+
+.nav-links a.active-link {
+  color: var(--primary);
 }
 
 .mobile-menu-btn {

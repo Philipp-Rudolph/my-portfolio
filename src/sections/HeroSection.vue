@@ -228,6 +228,7 @@ onUnmounted(() => {
 .hero h1 span {
     color: var(--primary);
     position: relative;
+    font-family: 'Array-Wide', sans-serif;
 }
 
 .typing-effect::after {

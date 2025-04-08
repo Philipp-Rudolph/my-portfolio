@@ -2,7 +2,7 @@
   {
     "title": "Waking Up In Stereo - Relaunch",
     "description": "Relaunch der Website für die Band Waking Up In Stereo mit neuem Design und verbesserter Benutzererfahrung.",
-    "image": "/api/placeholder/600/400",
+    "image": "/wuis.preview.png",
     "technologies": ["Kirby CMS", "PHP", "HTML", "CSS", "JavaScript", "Docker"],
     "demoLink": "https://www.wakingupinstereo.com",
     "codeLink": "#"
@@ -10,17 +10,9 @@
   {
     "title": "KVB Access - Barrierefreier Nahverkehr",
     "description": "Entwicklung einer Webanwendung zur Unterstützung von Menschen mit Behinderungen bei der Nutzung des öffentlichen Nahverkehrs in Köln.",
-    "image": "/api/placeholder/600/400",
+    "image": "/kvb-access.preview.png",
     "technologies": ["Vue.js", "Leaflet", "Docker", "reverse proxy"],
     "demoLink": "https://www.kvb-access.de",
-    "codeLink": "#"
-  },
-  {
-    "title": "Rosa Köln - Landingpage",
-    "description": "Entwicklung einer Landingpage für die Cocktailbar Rosa Köln mit Fokus auf Benutzerfreundlichkeit und ansprechendem Design.",
-    "image": "/api/placeholder/600/400",
-    "technologies": ["Kirby CMS", "HTML", "CSS", "JavaScript", "Docker"],
-    "demoLink": "https://www.rosa-koeln.de",
     "codeLink": "#"
   }
 ]
