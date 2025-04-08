@@ -43,17 +43,21 @@ const hideLoader = () => {
 };
 
 const cursorTrails = []; // Diese Zeile fehlt in deinem Code!
+
+// handleCursorTrail-Funktion für einen großen Hintergrundblob
 const handleCursorTrail = () => {
   const trails = document.querySelectorAll('.cursor-trail');
-  let mouseX = 0, mouseY = 0;
+  let mouseX = window.innerWidth / 2; // Starte in der Mitte
+  let mouseY = window.innerHeight / 2;
   
+  // Weniger Punkte für einen großen Hintergrundblob
   for (let i = 0; i < trails.length; i++) {
     cursorTrails.push({
-      x: 0,
-      y: 0,
+      x: mouseX,
+      y: mouseY,
       element: trails[i],
-      delay: i * 3, // Größerer Abstand zwischen den Punkten
-      size: Math.random() * 0.4 + 0.6 // Zufällige Größenvarianz
+      delay: i, // Längerer Delay für langsamere, sanftere Bewegung
+      scale: 1.0 + (i * 0.4) // Größere Skalierung für Blob-Effekt
     });
   }
   
@@ -68,30 +72,22 @@ const handleCursorTrail = () => {
     for (let i = 0; i < cursorTrails.length; i++) {
       const trail = cursorTrails[i];
       
-      // Weichere Bewegung mit variierender Geschwindigkeit
-      const speed = 8 + trail.delay;
+      // Sehr weiche, langsame Bewegung für einen Blob-Effekt
+      const speed = 15 + trail.delay;
       trail.x += (mouseX - trail.x) / speed;
       trail.y += (mouseY - trail.y) / speed;
       
-      // Element-Position aktualisieren
-      trail.element.style.transform = `translate(${trail.x}px, ${trail.y}px)`;
+      // Element-Position aktualisieren mit Skalierung
+      trail.element.style.transform = `translate(${trail.x}px, ${trail.y}px) scale(${trail.scale})`;
       
-      // Opacity basierend auf der Entfernung zur Maus
-      const distance = Math.sqrt(
-        Math.pow(mouseX - trail.x, 2) + 
-        Math.pow(mouseY - trail.y, 2)
-      );
-      
-      const maxDistance = 150; // Maximale Entfernung, bei der Punkte noch sichtbar sind
-      const opacity = Math.max(0, 1 - (distance / maxDistance));
-      trail.element.style.opacity = opacity * 0.7; // Reduzierte Maximalopazität für subtileren Effekt
+      // Konstante, aber niedrige Opazität für Hintergrundeffekt
+      trail.element.style.opacity = 0.15 - (i * 0.03);
     }
     
     animationFrameId = requestAnimationFrame(animateTrails);
   };
   
   animateTrails();
-
 };
 
 onMounted(() => {
@@ -129,6 +125,9 @@ onUnmounted(() => {
     <div class="loader-circle"></div>
   </div>
 
+  <!-- Cursor Trail Effect (jetzt vor dem App-Container für z-index) -->
+  <div v-for="i in 2" :key="`cursor-${i}`" class="cursor-trail"></div>
+
   <div class="app-container">
     <HeaderComponent :scrolled="scrolled" />
     <main>
@@ -142,9 +141,6 @@ onUnmounted(() => {
     
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top" :class="{ 'visible': showBackToTop }" @click.prevent="scrollToTop">↑</a>
-    
-    <!-- Cursor Trail Effect -->
-    <!-- <div v-for="i in 20" :key="`cursor-${i}`" class="cursor-trail"></div> -->
   </div>
 </template>
 
@@ -183,41 +179,28 @@ onUnmounted(() => {
   100% { transform: rotate(360deg); }
 }
 
-/* Cursor Trail Styles */
+/* Cursor Trail Styles als Hintergrundblob */
 .cursor-trail {
   position: fixed;
-  width: 8px;
-  height: 8px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   background-color: var(--primary);
-  box-shadow: 0 0 10px 2px var(--primary);
+  box-shadow: 0 0 80px 20px rgba(45, 212, 191, 0.2);
   pointer-events: none;
-  opacity: 0;
-  z-index: 9999;
-  filter: blur(2px);
-  transition: transform 0.1s linear, opacity 0.3s ease, width 0.2s ease, height 0.2s ease;
+  opacity: 0.15;
+  z-index: -1; /* Hinter dem Content */
+  filter: blur(80px);
+  transition: transform 0.8s ease-out, opacity 1s ease;
 }
 
-/* Variieren der Größe für besseren visuellen Effekt */
-.cursor-trail:nth-child(3n) {
-  width: 6px;
-  height: 6px;
-}
-
-.cursor-trail:nth-child(3n+1) {
-  width: 10px;
-  height: 10px;
-}
-
-/* Variieren der Farbe für interessantere Erscheinung */
-.cursor-trail:nth-child(2n) {
-  background-color: rgba(45, 212, 191, 0.1);
-  box-shadow: 0 0 8px 1px var(--primary);
-}
-
-.cursor-trail:nth-child(3n) {
-  background-color: rgba(45, 212, 191, 0.05);
-  box-shadow: 0 0 12px 2px var(--primary);
+/* Variieren der Größe und Farbe für Tiefeneffekt */
+.cursor-trail:nth-child(2) {
+  width: 600px;
+  height: 600px;
+  background-color: rgba(45, 212, 191, 0.07);
+  box-shadow: 0 0 100px 30px rgba(45, 212, 191, 0.08);
+  filter: blur(120px);
 }
 
 </style>

@@ -4,7 +4,7 @@
       <h2 class="section-title">Über mich</h2>
       <div class="about-content">
         <div class="about-image">
-          <img src="/philipp-profile.jpg" alt="Profilbild" @error="handleImageError">
+          <img :src="profileImage" alt="Profilbild" @error="handleImageError">
         </div>
         <div class="about-text">
           <p>
@@ -46,8 +46,10 @@ import { isElementInViewport, animateOnScroll } from '../utils/animations';
 
 // Fallback für Bilder, die nicht geladen werden können
 const handleImageError = (event) => {
-  event.target.src = '/placeholder-image.jpg'; // Stelle sicher, dass du dieses Bild hast
+  event.target.src = new URL('/placeholder-image.jpg', import.meta.url).href; // Stelle sicher, dass du dieses Bild hast
 };
+
+const profileImage = new URL('/philipp-profile.jpg', import.meta.url).href;
 
 // Abschnittsanimation
 const animateAboutSection = () => {

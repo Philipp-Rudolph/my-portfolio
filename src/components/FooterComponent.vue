@@ -2,13 +2,11 @@
   <footer>
     <div class="container">
       <div class="social-links">
-        <a href="#" class="social-link">X</a>
-        <a href="#" class="social-link">G</a>
-        <a href="#" class="social-link">I</a>
-        <a href="#" class="social-link">L</a>
+        <a href="https://github.com/Philipp-Rudolph" class="social-link">G</a>
+        <a href="https://www.linkedin.com/in/philipp-f-rudolph/" class="social-link">L</a>
       </div>
       <div class="copyright">
-        © {{ currentYear }} Mein Portfolio. Alle Rechte vorbehalten.
+        © {{ currentYear }} Philipp Rudolph. Alle Rechte vorbehalten.
       </div>
     </div>
   </footer>
