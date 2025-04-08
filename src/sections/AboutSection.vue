@@ -8,8 +8,8 @@
         </div>
         <div class="about-text">
           <p>
-            Ich bin ein leidenschaftlicher Junior Web Entwickler mit 3 Jahren Erfahrung im Bereich der Webentwicklung.
-            Nach meinem Studium habe ich in einem Unternehmen meine Karriere begonnen und dort an verschiedenen
+            Ich bin ein leidenschaftlicher Junior Web Entwickler mit {{ new Date().getFullYear() - 2022 }} Jahren Erfahrung im Bereich der Webentwicklung.
+            Während meinem Studium habe ich bei Klickmeister meine Karriere begonnen und dort an verschiedenen
             spannenden Projekten gearbeitet.
           </p>
           <p>
@@ -17,22 +17,31 @@
             Webanwendungen. Dabei lege ich großen Wert auf sauberen, wartbaren Code und eine optimale Performance.
           </p>
           <p>
-            Neben meiner Tätigkeit im Unternehmen habe ich auch als Freelancer verschiedene Projekte umgesetzt und
+            Neben meiner Tätigkeit bei Klickmeister habe ich auch als Freelancer verschiedene Projekte umgesetzt und
             konnte so meine Fähigkeiten weiter ausbauen und vielseitige Erfahrungen sammeln.
           </p>
           <div class="skills">
             <div class="skill">HTML5</div>
             <div class="skill">CSS3</div>
             <div class="skill">JavaScript</div>
+            <div class="skill">PHP</div>
+            <div class="skill">Kirby CMS</div>
             <div class="skill">Vue.js</div>
             <div class="skill">Nuxt.js</div>
-            <div class="skill">Tailwind CSS</div>
             <div class="skill">SCSS</div>
             <div class="skill">Node.js</div>
+            <div class="skill">Bun.sh</div>
             <div class="skill">Express</div>
-            <div class="skill">MongoDB</div>
+            <div class="skill">Docker</div>
+            <div class="skill">k8s</div>
+            <div class="skill">SQL</div>
             <div class="skill">Git</div>
+            <div class="skill">CI / CD</div>
             <div class="skill">Responsive Design</div>
+            <div class="skill">Figma</div>
+            <div class="skill">DSGVO</div>
+            <div class="skill">TTDSG</div>
+            <div class="skill">Consent Management</div>
           </div>
         </div>
       </div>

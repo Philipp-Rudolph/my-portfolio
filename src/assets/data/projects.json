@@ -3,7 +3,7 @@
     "title": "Waking Up In Stereo - Relaunch",
     "description": "Relaunch der Website für die Band Waking Up In Stereo mit neuem Design und verbesserter Benutzererfahrung.",
     "image": "/wuis.preview.png",
-    "technologies": ["Kirby CMS", "PHP", "HTML", "CSS", "JavaScript", "Docker"],
+    "technologies": ["Kirby CMS", "PHP", "HTML", "CSS", "JavaScript", "Docker", "nginx", "umami"],
     "demoLink": "https://www.wakingupinstereo.com",
     "codeLink": "#"
   },
@@ -11,7 +11,7 @@
     "title": "KVB Access - Barrierefreier Nahverkehr",
     "description": "Entwicklung einer Webanwendung zur Unterstützung von Menschen mit Behinderungen bei der Nutzung des öffentlichen Nahverkehrs in Köln.",
     "image": "/kvb-access.preview.png",
-    "technologies": ["Vue.js", "Leaflet", "Docker", "reverse proxy"],
+    "technologies": ["Vue.js", "Leaflet", "Docker", "nginx", "reverse proxy", "umami"],
     "demoLink": "https://www.kvb-access.de",
     "codeLink": "#"
   }
