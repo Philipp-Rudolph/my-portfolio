@@ -99,7 +99,7 @@ onUnmounted(() => {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   transform: translateY(50px);
   opacity: 0;
-  height: 400px;
+  height: 100%;
   background-color: rgba(45, 212, 191, 0.05); 
 }
 
