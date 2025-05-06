@@ -20,28 +20,29 @@
             Neben meiner Tätigkeit bei Klickmeister habe ich auch als Freelancer verschiedene Projekte umgesetzt und
             konnte so meine Fähigkeiten weiter ausbauen und vielseitige Erfahrungen sammeln.
           </p>
-          <div class="skills">
-            <div class="skill">HTML5</div>
-            <div class="skill">CSS3</div>
-            <div class="skill">JavaScript</div>
-            <div class="skill">PHP</div>
-            <div class="skill">Kirby CMS</div>
-            <div class="skill">Vue.js</div>
-            <div class="skill">Nuxt.js</div>
-            <div class="skill">SCSS</div>
-            <div class="skill">Node.js</div>
-            <div class="skill">Bun.sh</div>
-            <div class="skill">Express</div>
-            <div class="skill">Docker</div>
-            <div class="skill">k8s</div>
-            <div class="skill">SQL</div>
-            <div class="skill">Git</div>
-            <div class="skill">CI / CD</div>
-            <div class="skill">Responsive Design</div>
-            <div class="skill">Figma</div>
-            <div class="skill">DSGVO</div>
-            <div class="skill">TTDSG</div>
-            <div class="skill">Consent Management</div>
+        </div>
+      </div>
+      
+      <!-- New Skills Layout -->
+      <h3 class="skills-heading">Meine Fähigkeiten</h3>
+      <div class="skills-container">
+        <div v-for="(skillType, index) in uniqueSkillTypes" :key="index" class="skills-category">
+          <div class="category-header">
+            <h4>{{ skillType.charAt(0).toUpperCase() + skillType.slice(1) }}</h4>
+          </div>
+          <div class="skills-grid">
+            <div 
+              v-for="skill in skills.filter(s => s.type === skillType)" 
+              :key="skill.name"
+              class="skill-card"
+              :class="{ 'featured': skill.featured }"
+            >
+              <div class="skill-icon-wrapper">
+                <div class="skill-icon-bg"></div>
+                <div class="skill-level" :style="{ width: `${skill.level || 70}%` }"></div>
+              </div>
+              <span class="skill-name">{{ skill.name }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -50,23 +51,56 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { isElementInViewport, animateOnScroll } from '../utils/animations';
+
+import skills from '@/assets/data/skills.json';
+console.log(skills);
+
+// Add a 'featured' property to some skills if not already present
+// This is just for demo purposes - you can remove this and manually set in your JSON instead
+const enhancedSkills = skills.map((skill, index) => ({
+  ...skill,
+  featured: skill.featured || index % 5 === 0, // Every 5th skill is featured
+  level: skill.level || Math.floor(Math.random() * 30) + 70 // Random level between 70-100% if not set
+}));
+
+const skillTypes = enhancedSkills.map(skill => skill.type);
+const uniqueSkillTypes = [...new Set(skillTypes)];
+
+console.log(uniqueSkillTypes);
 
 // Fallback für Bilder, die nicht geladen werden können
 const handleImageError = (event) => {
-  event.target.src = new URL('/placeholder-image.jpg', import.meta.url).href; // Stelle sicher, dass du dieses Bild hast
+  event.target.src = new URL('/placeholder-image.jpg', import.meta.url).href;
 };
 
 const profileImage = new URL('/philipp-profile.jpg', import.meta.url).href;
 
-// Abschnittsanimation
+// Animation functions
 const animateAboutSection = () => {
   const aboutImage = document.querySelector('.about-image');
   const aboutText = document.querySelector('.about-text');
+  const skillsCategories = document.querySelectorAll('.skills-category');
   
   if (aboutImage) animateOnScroll(aboutImage);
   if (aboutText) animateOnScroll(aboutText);
+  
+  skillsCategories.forEach((category, index) => {
+    if (isElementInViewport(category)) {
+      setTimeout(() => {
+        category.classList.add('animate-in');
+        
+        // Animate individual skill cards with staggered delay
+        const cards = category.querySelectorAll('.skill-card');
+        cards.forEach((card, cardIndex) => {
+          setTimeout(() => {
+            card.classList.add('animate-in');
+          }, 100 * cardIndex);
+        });
+      }, 200 * index);
+    }
+  });
 };
 
 onMounted(() => {
@@ -94,12 +128,12 @@ onUnmounted(() => {
 }
 
 .about-image {
+  height: 100%;
   overflow: hidden;
   border-radius: 10px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   transform: translateY(50px);
   opacity: 0;
-  height: 400px;
   background-color: rgba(45, 212, 191, 0.05); 
 }
 
@@ -120,6 +154,10 @@ onUnmounted(() => {
 .about-text {
   transform: translateY(50px);
   opacity: 0;
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .about-text p {
@@ -128,26 +166,155 @@ onUnmounted(() => {
   color: var(--gray);
 }
 
-.skills {
-  display: flex;
-  flex-wrap: wrap;
+/* New Skills Styling */
+.skills-heading {
+  margin: 5rem 0 2rem;
+  font-size: 1.8rem;
+  text-align: center;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+.skills-heading:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.skills-container {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+}
+
+.skills-category {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.skills-category.animate-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.category-header {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.category-header h4 {
+  font-size: 1.3rem;
+  margin: 0;
+  padding-bottom: 0.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.category-header h4:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
 }
 
-.skill {
-  padding: 0.5rem 1.2rem;
-  background-color: rgba(45, 212, 191, 0.1);
-  border-radius: 20px;
-  color: var(--primary);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+.skill-card {
+  background-color: rgba(45, 212, 191, 0.04);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.skill:hover {
+.skill-card.animate-in {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.skill-card:hover {
   transform: translateY(-5px);
-  background-color: rgba(45, 212, 191, 0.2);
+  background-color: rgba(45, 212, 191, 0.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card.featured {
+  background-color: rgba(45, 212, 191, 0.1);
+  box-shadow: 0 5px 15px rgba(45, 212, 191, 0.15);
+}
+
+.skill-card.featured:hover {
+  background-color: rgba(45, 212, 191, 0.15);
+  box-shadow: 0 10px 25px rgba(45, 212, 191, 0.2);
+}
+
+.skill-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0.8rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill-icon-bg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  position: absolute;
+}
+
+.skill-level {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 3px;
+  transition: width 1s ease-in-out;
+}
+
+.skill-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--gray);
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.skill-card:hover .skill-name {
+  color: var(--primary);
 }
 
 /* Responsive Anpassungen */
@@ -160,6 +327,31 @@ onUnmounted(() => {
   .about-image {
     max-width: 500px;
     margin: 0 auto;
+  }
+  
+  .skills-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  }
+  
+  .skill-card {
+    padding: 0.8rem;
+  }
+  
+  .skill-icon-wrapper {
+    width: 50px;
+    height: 50px;
   }
 }
 </style>

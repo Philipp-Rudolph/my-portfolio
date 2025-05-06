@@ -1,0 +1,23 @@
+[
+  { "name": "HTML5", "type": "frontend", "level": 90, "featured": true },
+  { "name": "CSS3", "type": "frontend", "level": 88 },
+  { "name": "JavaScript", "type": "frontend", "level": 85, "featured": true },
+  { "name": "PHP", "type": "backend", "level": 78 },
+  { "name": "Kirby CMS", "type": "frontend", "level": 82 },
+  { "name": "Vue.js", "type": "frontend", "level": 87, "featured": true },
+  { "name": "Nuxt.js", "type": "frontend", "level": 80 },
+  { "name": "SCSS", "type": "frontend", "level": 85 },
+  { "name": "Node.js", "type": "backend", "level": 75, "featured": true },
+  { "name": "Bun.sh", "type": "backend", "level": 65 },
+  { "name": "Express", "type": "backend", "level": 72 },
+  { "name": "Docker", "type": "devops", "level": 68, "featured": true },
+  { "name": "k8s", "type": "devops", "level": 60 },
+  { "name": "SQL", "type": "backend", "level": 75 },
+  { "name": "Git", "type": "tools", "level": 85, "featured": true },
+  { "name": "CI / CD", "type": "devops", "level": 70 },
+  { "name": "Responsive Design", "type": "frontend", "level": 92 },
+  { "name": "Figma", "type": "design", "level": 78, "featured": true },
+  { "name": "DSGVO", "type": "legal", "level": 75 },
+  { "name": "TTDSG", "type": "legal", "level": 70 },
+  { "name": "Consent Management", "type": "legal", "level": 80, "featured": true }
+]

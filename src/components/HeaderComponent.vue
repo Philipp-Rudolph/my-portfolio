@@ -2,7 +2,7 @@
   <header :class="{ 'header-scrolled': scrolled }">
     <div class="container">
       <nav>
-        <div class="logo">Portfolio.</div>
+        <div class="logo">> P.R.</div>
         <div class="nav-links" :class="{ 'active': mobileMenuOpen }">
           <a
             href="#home"
