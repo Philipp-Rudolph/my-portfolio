@@ -1,14 +1,10 @@
 services:
   my-portfolio:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: areyouhigh/my-portfolio:latest
+    container_name: my-portfolio
     ports:
       - '8081:80'
     restart: always
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    # Wir entfernen die user: nginx Anweisung, da sie Berechtigungsprobleme verursacht
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
