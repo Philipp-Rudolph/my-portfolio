@@ -33,11 +33,3 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:latest
-
-      # Schritt 4: Trigger Deployment Webhook
-      - name: Trigger Deployment Webhook
-        run: |
-          SECRET=${{ secrets.WEBHOOK_SECRET }}
-          curl -X POST \
-            -H "Authorization: $SECRET" \
-            "http://${{ secrets.VPS_IP_ADDRESS }}:${{ secrets.VPS_WEBHOOK_PORT }}/hooks/deploy?repo=${{ env.REPO_NAME }}"
