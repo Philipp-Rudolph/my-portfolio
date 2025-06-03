@@ -39,5 +39,5 @@ jobs:
         run: |
           SECRET=${{ secrets.WEBHOOK_SECRET }}
           curl -X POST \
-            -H "Authorization: Bearer $SECRET" \
+            -H "Authorization: $SECRET" \
             "http://${{ secrets.VPS_IP_ADDRESS }}:${{ secrets.VPS_WEBHOOK_PORT }}/hooks/deploy?repo=${{ env.REPO_NAME }}"
