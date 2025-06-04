@@ -1,5 +1,13 @@
 [
   {
+    "title": "diff-check - Code Vergleichstool",
+    "description": "Ein webbasiertes Tool zum Vergleichen von Textdateien und Code mit Syntax-Highlighting und verschiedenen Diff-Algorithmen.",
+    "image": "/diff-check.preview.jpg",
+    "technologies": ["Vue.js", "JavaScript", "CSS3", "HTML5", "Diff Algorithmen"],
+    "demoLink": "https://diff-check.philipp-rudolph.dev",
+    "codeLink": "#"
+  },
+  {
     "title": "Waking Up In Stereo - Relaunch",
     "description": "Relaunch der Website für die Band Waking Up In Stereo mit neuem Design und verbesserter Benutzererfahrung.",
     "image": "/wuis.preview.png",
