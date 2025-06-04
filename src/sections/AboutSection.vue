@@ -50,8 +50,8 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
-import { isElementInViewport, animateOnScroll } from '../utils/animations';
+import { onMounted } from 'vue';
+import { fadeInLeft, fadeInRight, staggerAnimation, scaleIn } from '@/utils/animations';
 
 // Fallback für Bilder, die nicht geladen werden können
 const handleImageError = (event) => {
@@ -60,60 +60,74 @@ const handleImageError = (event) => {
 
 const profileImage = new URL('/philipp-profile.jpg', import.meta.url).href;
 
-// Abschnittsanimation
-const animateAboutSection = () => {
+// GSAP Abschnittsanimation
+const setupAboutAnimations = () => {
+  const sectionTitle = document.querySelector('.about .section-title');
   const aboutImage = document.querySelector('.about-image');
   const aboutText = document.querySelector('.about-text');
+  const skills = document.querySelectorAll('.skill');
+  const paragraphs = document.querySelectorAll('.about-text p');
   
-  if (aboutImage) animateOnScroll(aboutImage);
-  if (aboutText) animateOnScroll(aboutText);
+  if (sectionTitle) {
+    scaleIn(sectionTitle);
+  }
+  
+  if (aboutImage) {
+    fadeInLeft(aboutImage, 0.2);
+  }
+  
+  if (aboutText) {
+    fadeInRight(aboutText, 0.4);
+  }
+  
+  if (paragraphs.length > 0) {
+    staggerAnimation(paragraphs, 0.1);
+  }
+  
+  if (skills.length > 0) {
+    staggerAnimation(skills, 0.05);
+  }
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', animateAboutSection);
-  // Initial-Check
-  setTimeout(animateAboutSection, 1000);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', animateAboutSection);
+  setupAboutAnimations();
 });
 </script>
 
 <style scoped>
 .about {
-  padding: 8rem 0;
+  padding: var(--spacing-4xl) 0;
   position: relative;
 }
 
 .about-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: var(--spacing-2xl);
   align-items: center;
 }
 
 .about-image {
   overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
   transform: translateY(50px);
   opacity: 0;
   height: 100%;
-  background-color: rgba(45, 212, 191, 0.05); 
+  background-color: var(--primary-light);
 }
 
 .about-image img {
   width: 100%;
   height: 100%;
   display: block;
-  transition: all 0.5s ease;
+  transition: all var(--transition-normal);
   object-fit: cover;
   filter: grayscale(1) brightness(0.8);
 }
 
 .about-image:hover img {
-  transform: scale(1.05);
+  transform: var(--transform-scale-up);
   filter: grayscale(0);
 }
 
@@ -123,7 +137,7 @@ onUnmounted(() => {
 }
 
 .about-text p {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
   line-height: 1.7;
   color: var(--gray);
 }
@@ -131,30 +145,30 @@ onUnmounted(() => {
 .skills {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
 }
 
 .skill {
-  padding: 0.5rem 1.2rem;
-  background-color: rgba(45, 212, 191, 0.1);
-  border-radius: 20px;
+  padding: var(--spacing-xs) var(--font-base);
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius-lg);
   color: var(--primary);
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  font-size: var(--font-xs);
+  font-weight: var(--font-medium);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 
 .skill:hover {
-  transform: translateY(-5px);
-  background-color: rgba(45, 212, 191, 0.2);
+  transform: var(--transform-up);
+  background-color: var(--primary-hover);
 }
 
 /* Responsive Anpassungen */
-@media (max-width: 992px) {
+@media (max-width: var(--breakpoint-desktop)) {
   .about-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: var(--spacing-xl);
   }
   
   .about-image {

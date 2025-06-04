@@ -150,14 +150,14 @@ onUnmounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: var(--viewport-width);
+  height: var(--viewport-height);
   background-color: var(--dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: var(--z-loader);
+  transition: opacity var(--transition-normal), visibility var(--transition-normal);
 }
 
 .loader.hidden {
@@ -168,9 +168,9 @@ onUnmounted(() => {
 .loader-circle {
   width: 50px;
   height: 50px;
-  border: 3px solid rgba(45, 212, 191, 0.3);
+  border: 3px solid var(--primary-shadow);
   border-top: 3px solid var(--primary);
-  border-radius: 50%;
+  border-radius: var(--border-radius-full);
   animation: spin 1s linear infinite;
 }
 
@@ -184,14 +184,14 @@ onUnmounted(() => {
   position: fixed;
   width: 400px;
   height: 400px;
-  border-radius: 50%;
+  border-radius: var(--border-radius-full);
   background-color: var(--primary);
-  box-shadow: 0 0 80px 20px rgba(45, 212, 191, 0.2);
+  box-shadow: 0 0 80px 20px var(--primary-muted);
   pointer-events: none;
-  opacity: 0.15;
-  z-index: -1; /* Hinter dem Content */
+  opacity: var(--opacity-disabled);
+  z-index: var(--z-background);
   filter: blur(80px);
-  transition: transform 0.8s ease-out, opacity 1s ease;
+  transition: transform var(--transition-slow), opacity 1s ease;
 }
 
 /* Variieren der Größe und Farbe für Tiefeneffekt */
@@ -207,7 +207,7 @@ onUnmounted(() => {
 
 <style scoped>
 .app-container {
-  min-height: 100vh;
+  min-height: var(--viewport-height);
   display: flex;
   flex-direction: column;
 }
@@ -218,26 +218,26 @@ main {
 
 .back-to-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: var(--spacing-lg);
+  right: var(--spacing-lg);
   width: 50px;
   height: 50px;
   background-color: var(--primary);
   color: var(--dark);
-  border-radius: 50%;
+  border-radius: var(--border-radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: var(--font-base);
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 99;
+  transform: var(--transform-down);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: var(--z-overlay);
 }
 
 .back-to-top.visible {
-  opacity: 1;
+  opacity: var(--opacity-visible);
   transform: translateY(0);
 }
 </style>

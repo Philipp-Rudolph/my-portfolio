@@ -19,35 +19,35 @@ const currentYear = new Date().getFullYear();
 
 <style scoped>
 footer {
-  padding: 3rem 0;
+  padding: var(--spacing-xl) 0;
   text-align: center;
   background-color: rgba(24, 24, 27, 0.8);
 }
 .social-links {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
 }
 .social-link {
   width: 40px;
   height: 40px;
-  background-color: rgba(45, 212, 191, 0.1);
-  border-radius: 50%;
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary);
   text-decoration: none;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
 }
 .social-link:hover {
-  transform: translateY(-5px);
+  transform: var(--transform-up);
   background-color: var(--primary);
   color: var(--dark);
 }
 .copyright {
   color: var(--gray);
-  font-size: 0.9rem;
+  font-size: var(--font-xs);
 }
 </style>

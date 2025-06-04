@@ -21,34 +21,112 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
-import { isElementInViewport, animateOnScroll } from '../utils/animations';
+import { ref, onMounted } from 'vue';
+import { gsap } from 'gsap';
+import { scaleIn } from '@/utils/animations';
 import experienceData from '@/assets/data/experience.json';
 
 const experience = ref(experienceData);
 
-// Timeline-Einträge animieren
-const animateTimelineItems = () => {
+// GSAP Timeline Animationen
+const setupExperienceAnimations = () => {
+  const sectionTitle = document.querySelector('.experience .section-title');
   const timelineItems = document.querySelectorAll('.timeline-item');
-  timelineItems.forEach((item, index) => {
-    animateOnScroll(item, index, 150);
+  
+  if (sectionTitle) {
+    scaleIn(sectionTitle);
+  }
+  
+  // Animate the timeline line drawing
+  if (timelineItems.length > 0) {
+    gsap.fromTo('.timeline::after', 
+      { scaleY: 0, transformOrigin: "top" },
+      {
+        scaleY: 1,
+        duration: 1.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: '.timeline',
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }
+  
+  // Animate timeline items
+  timelineItems.forEach((item) => {
+    const isLeft = item.classList.contains('left');
+    const content = item.querySelector('.timeline-content');
+    
+    // Initial setup for the entire item
+    gsap.set(item, { opacity: 0 });
+    gsap.set(content, { x: isLeft ? -80 : 80, y: 30 });
+    
+    // Create animation for the entire timeline item
+    gsap.fromTo(item,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+    
+    // Animate content sliding in
+    gsap.fromTo(content,
+      { x: isLeft ? -80 : 80, y: 30 },
+      {
+        x: 0,
+        y: 0,
+        duration: 0.8,
+        delay: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 85%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+    
+    // Add a subtle hover effect
+    item.addEventListener('mouseenter', () => {
+      gsap.to(content, {
+        scale: 1.02,
+        y: -5,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+    
+    item.addEventListener('mouseleave', () => {
+      gsap.to(content, {
+        scale: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
   });
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', animateTimelineItems);
-  // Initial-Check
-  setTimeout(animateTimelineItems, 1000);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', animateTimelineItems);
+  setupExperienceAnimations();
 });
 </script>
 
 <style scoped>
 .experience {
-  padding: 8rem 0;
+  padding: var(--spacing-4xl) 0;
 }
 
 .timeline {
@@ -61,7 +139,7 @@ onUnmounted(() => {
   content: '';
   position: absolute;
   width: 2px;
-  background-color: rgba(45, 212, 191, 0.2);
+  background-color: var(--primary-hover);
   top: 0;
   bottom: 0;
   left: 50%;
@@ -73,7 +151,7 @@ onUnmounted(() => {
   position: relative;
   width: 50%;
   opacity: 0;
-  transform: translateY(50px);
+  transform: var(--transform-down);
 }
 
 .timeline-item::after {
@@ -82,9 +160,9 @@ onUnmounted(() => {
   width: 20px;
   height: 20px;
   background-color: var(--primary);
-  border-radius: 50%;
+  border-radius: var(--border-radius-full);
   top: 15px;
-  z-index: 1;
+  z-index: var(--z-content);
 }
 
 .left {
@@ -104,32 +182,32 @@ onUnmounted(() => {
 }
 
 .timeline-content {
-  padding: 1.5rem;
-  background-color: rgba(45, 212, 191, 0.05);
-  border-radius: 8px;
+  padding: var(--spacing-md);
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius-md);
   position: relative;
 }
 
 .timeline-date {
-  font-size: 0.9rem;
+  font-size: var(--font-xs);
   color: var(--primary);
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-medium);
 }
 
 .timeline-title {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: var(--font-base);
+  margin-bottom: var(--spacing-sm);
 }
 
 .timeline-description {
   color: var(--gray);
-  font-size: 0.95rem;
+  font-size: var(--font-xs);
   line-height: 1.6;
 }
 
 /* Responsive Layout für mobile Geräte */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
   .timeline::after {
     left: 31px;
   }

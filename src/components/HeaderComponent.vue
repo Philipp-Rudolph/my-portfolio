@@ -121,12 +121,12 @@ onUnmounted(() => {
 
 <style scoped>
 header {
-  padding: 2rem 0;
+  padding: var(--spacing-lg) 0;
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 100;
-  transition: background-color 0.3s ease;
+  z-index: var(--z-nav);
+  transition: background-color var(--transition-fast);
   background-color: rgba(24, 24, 27, 0.8);
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -145,21 +145,21 @@ nav {
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: var(--font-xl);
   font-weight: 700;
   color: var(--primary);
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: var(--spacing-lg);
 }
 
 .nav-links a {
   color: var(--light);
   text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  font-weight: var(--font-medium);
+  transition: color var(--transition-fast);
   position: relative;
 }
 
@@ -175,7 +175,7 @@ nav {
   bottom: -5px;
   left: 0;
   background-color: var(--primary);
-  transition: width 0.3s ease;
+  transition: width var(--transition-fast);
 }
 
 .nav-links a:hover::after,
@@ -192,37 +192,37 @@ nav {
   background: none;
   border: none;
   color: var(--light);
-  font-size: 1.5rem;
+  font-size: var(--font-lg);
   cursor: pointer;
 }
 
 /* Mobile Styles */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
   .nav-links {
     position: fixed;
     top: 0;
     right: -300px;
     width: 300px;
-    height: 100vh;
+    height: var(--viewport-height);
     background-color: var(--dark);
     flex-direction: column;
-    padding: 2rem;
-    transition: right 0.3s ease;
-    z-index: 101;
+    padding: var(--spacing-lg);
+    transition: right var(--transition-fast);
+    z-index: var(--z-nav);
   }
   
   .nav-links.active {
     right: 0;
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-nav);
   }
   
   .mobile-menu-btn {
     display: block;
-    z-index: 102;
+    z-index: var(--z-nav-toggle);
   }
   
   .nav-links a {
-    padding: 1rem 0;
+    padding: var(--spacing-sm) 0;
     display: block;
   }
   

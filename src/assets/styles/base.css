@@ -1,8 +1,93 @@
 :root {
+  /* Color Palette */
   --primary: #2dd4bf;
+  --primary-light: rgba(45, 212, 191, 0.1);
+  --primary-hover: rgba(45, 212, 191, 0.2);
+  --primary-shadow: rgba(45, 212, 191, 0.3);
   --dark: #18181b;
   --light: #f5f5f5;
   --gray: #a1a1aa;
+  
+  /* Spacing Scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  --spacing-3xl: 6rem;
+  --spacing-4xl: 8rem;
+  
+  /* Font Sizes */
+  --font-xs: 0.9rem;
+  --font-sm: 1rem;
+  --font-base: 1.2rem;
+  --font-lg: 1.5rem;
+  --font-xl: 2rem;
+  --font-2xl: 2.5rem;
+  --font-3xl: 4rem;
+  
+  /* Font Weights */
+  --font-light: 200;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  
+  /* Layout */
+  --container-max-width: 1200px;
+  --header-height: 80px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 10px;
+  --border-radius-lg: 20px;
+  --border-radius-full: 50%;
+  
+  /* Shadows */
+  --shadow-sm: 0 10px 20px rgba(45, 212, 191, 0.3);
+  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.2);
+  --shadow-nav: -5px 0 30px rgba(0, 0, 0, 0.2);
+  
+  /* Transitions */
+  --transition-fast: 0.3s ease;
+  --transition-normal: 0.5s ease;
+  --transition-slow: 0.8s ease;
+  
+  /* Animation Timings */
+  --animation-delay-1: 300ms;
+  --animation-delay-2: 500ms;
+  --animation-delay-3: 700ms;
+  --animation-delay-4: 900ms;
+  --animation-typing-fast: 50ms;
+  --animation-typing-normal: 150ms;
+  --animation-typing-pause: 1500ms;
+  
+  /* Z-Index Scale */
+  --z-background: -1;
+  --z-content: 1;
+  --z-overlay: 99;
+  --z-nav: 101;
+  --z-nav-toggle: 102;
+  --z-loader: 9999;
+  
+  /* Viewport Units */
+  --viewport-height: 100vh;
+  --viewport-width: 100vw;
+  
+  /* Breakpoints for JS usage */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 992px;
+  
+  /* Opacity Scale */
+  --opacity-disabled: 0.1;
+  --opacity-muted: 0.2;
+  --opacity-visible: 1;
+  
+  /* Additional Color Variations */
+  --primary-muted: rgba(45, 212, 191, 0.2);
+  
+  /* Transforms */
+  --transform-up: translateY(-5px);
+  --transform-down: translateY(20px);
+  --transform-scale-up: scale(1.05);
 }
 
 * {
@@ -10,7 +95,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Chillax-Regular', sans-serif;
-  font-weight: 200;
+  font-weight: var(--font-light);
 }
 
 html {
@@ -24,15 +109,15 @@ body {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 var(--spacing-lg);
 }
 
-/* In einer globalen CSS-Datei oder in App.vue */
+/* Section Title Component */
 .section-title {
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
+  font-size: var(--font-2xl);
+  margin-bottom: var(--spacing-xl);
   display: inline-block;
   position: relative;
 }
@@ -40,7 +125,7 @@ body {
 .section-title::after {
   content: '';
   position: absolute;
-  height: 4px;
+  height: var(--border-radius-sm);
   width: 50px;
   background-color: var(--primary);
   bottom: -10px;
@@ -48,32 +133,32 @@ body {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
   .nav-links {
       position: fixed;
       top: 0;
       right: -300px;
       width: 300px;
-      height: 100vh;
+      height: var(--viewport-height);
       background-color: var(--dark);
       flex-direction: column;
-      padding: 2rem;
-      transition: right 0.3s ease;
-      z-index: 101;
+      padding: var(--spacing-lg);
+      transition: right var(--transition-fast);
+      z-index: var(--z-nav);
   }
   
   .nav-links.active {
       right: 0;
-      box-shadow: -5px 0 30px rgba(0, 0, 0, 0.2);
+      box-shadow: var(--shadow-nav);
   }
   
   .mobile-menu-btn {
       display: block;
-      z-index: 102;
+      z-index: var(--z-nav-toggle);
   }
   
   .hero h1 {
-      font-size: 2.5rem;
+      font-size: var(--font-2xl);
   }
   
   .projects-grid {

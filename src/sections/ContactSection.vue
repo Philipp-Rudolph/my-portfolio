@@ -52,8 +52,9 @@
 </template>
 
 <script setup>
-import { reactive, ref, onMounted, onUnmounted } from 'vue';
-import { isElementInViewport, animateOnScroll } from '@/utils/animations';
+import { reactive, ref, onMounted } from 'vue';
+import { gsap } from 'gsap';
+import { scaleIn, fadeInLeft, fadeInRight } from '@/utils/animations';
 
 // Formspree-URL (ersetze mit deiner ID)
 const FORMSPREE_URL = 'https://formspree.io/f/mjkypnky';
@@ -130,71 +131,158 @@ const submitForm = async () => {
   }
 };
 
-// Kontaktbereichsanimation
-const animateContactSection = () => {
+// GSAP Kontaktbereichsanimation
+const setupContactAnimations = () => {
+  const sectionTitle = document.querySelector('.contact .section-title');
   const contactInfo = document.querySelector('.contact-info');
   const contactForm = document.querySelector('.contact-form');
-  if (contactInfo) animateOnScroll(contactInfo);
-  if (contactForm) animateOnScroll(contactForm);
+  const contactMethods = document.querySelectorAll('.contact-method');
+  const formGroups = document.querySelectorAll('.form-group');
+  const submitBtn = document.querySelector('.submit-btn');
+  
+  if (sectionTitle) {
+    scaleIn(sectionTitle);
+  }
+  
+  if (contactInfo) {
+    fadeInLeft(contactInfo, 0.2);
+  }
+  
+  if (contactForm) {
+    fadeInRight(contactForm, 0.4);
+  }
+  
+  if (contactMethods.length > 0) {
+    gsap.fromTo(contactMethods,
+      { opacity: 0, x: -50, scale: 0.9 },
+      {
+        opacity: 1,
+        x: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(1.7)",
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: contactMethods[0],
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }
+  
+  if (formGroups.length > 0) {
+    gsap.fromTo(formGroups,
+      { opacity: 0, y: 30, scale: 0.95 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: formGroups[0],
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }
+  
+  if (submitBtn) {
+    gsap.fromTo(submitBtn,
+      { opacity: 0, y: 20, scale: 0.9 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "back.out(2)",
+        scrollTrigger: {
+          trigger: submitBtn,
+          start: "top 90%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+    
+    // Enhanced button hover animation
+    submitBtn.addEventListener('mouseenter', () => {
+      gsap.to(submitBtn, {
+        scale: 1.05,
+        y: -3,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+    
+    submitBtn.addEventListener('mouseleave', () => {
+      gsap.to(submitBtn, {
+        scale: 1,
+        y: 0,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+  }
 };
 
 onMounted(() => {
-  window.addEventListener('scroll', animateContactSection);
-  setTimeout(animateContactSection, 1000);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', animateContactSection);
+  setupContactAnimations();
 });
 </script>
 
 
 <style scoped>
 .contact {
-  padding: 8rem 0;
-  background-color: rgba(45, 212, 191, 0.03);
+  padding: var(--spacing-4xl) 0;
+  background-color: var(--primary-light);
 }
 
 .contact-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: var(--spacing-2xl);
 }
 
 .contact-info {
-  transform: translateY(50px);
+  transform: var(--transform-down);
   opacity: 0;
 }
 
 .contact-info p {
   color: var(--gray);
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-lg);
   line-height: 1.7;
 }
 
 .contact-method {
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .contact-icon {
   width: 40px;
   height: 40px;
-  background-color: rgba(45, 212, 191, 0.1);
-  border-radius: 50%;
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 1rem;
+  margin-right: var(--spacing-sm);
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: var(--font-base);
 }
 
 .contact-method a {
   color: var(--light);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--transition-fast);
 }
 
 .contact-method a:hover {
@@ -202,29 +290,29 @@ onUnmounted(() => {
 }
 
 .contact-form {
-  transform: translateY(50px);
+  transform: var(--transform-down);
   opacity: 0;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--spacing-md);
 }
 
 .form-control {
   width: 100%;
-  padding: 1rem;
+  padding: var(--spacing-sm);
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  border-radius: var(--border-radius-sm);
   color: var(--light);
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: var(--font-sm);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .form-control:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
+  box-shadow: 0 0 0 3px var(--primary-hover);
 }
 
 textarea.form-control {
@@ -233,34 +321,34 @@ textarea.form-control {
 }
 
 .submit-btn {
-  padding: 0.8rem 2rem;
+  padding: 0.8rem var(--spacing-lg);
   background-color: var(--primary);
   color: var(--dark);
   border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 1rem;
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-semibold);
+  font-size: var(--font-sm);
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .submit-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(45, 212, 191, 0.3);
+  transform: var(--transform-up);
+  box-shadow: var(--shadow-sm);
 }
 
 .form-status {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-xs);
   text-align: center;
-  transition: opacity 0.3s ease;
-  opacity: 1;
+  transition: opacity var(--transition-fast);
+  opacity: var(--opacity-visible);
 }
 
 .form-status.success {
-  background-color: rgba(45, 212, 191, 0.1);
+  background-color: var(--primary-light);
   color: var(--primary);
 }
 
@@ -270,13 +358,13 @@ textarea.form-control {
 }
 
 .form-status.hidden {
-  opacity: 0;
+  opacity: var(--opacity-disabled);
 }
 
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
   .contact-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: var(--spacing-lg);
   }
 }
 </style>

@@ -26,6 +26,8 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { gsap } from 'gsap';
+import { fadeInUp, fadeInLeft, scaleIn } from '@/utils/animations';
 
 const typingElement = ref(null);
 const particles = ref([]);
@@ -128,38 +130,77 @@ const typeWriter = () => {
   setTimeout(type, 1000);
 };
 
-// Hero-Bereich animieren
+// Hero-Bereich animieren mit GSAP
 const animateHero = () => {
   const greeting = document.querySelector('.hero-greeting');
   const heading = document.querySelector('.hero h1');
   const description = document.querySelector('.hero-description');
   const cta = document.querySelector('.hero-cta');
+  const particles = document.querySelectorAll('.particle');
   
   if (!greeting || !heading || !description || !cta) return;
   
-  setTimeout(() => {
-    greeting.style.opacity = '1';
-    greeting.style.transform = 'translateY(0)';
-    greeting.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-  }, 300);
+  // Timeline für koordinierte Animationen
+  const tl = gsap.timeline();
   
-  setTimeout(() => {
-    heading.style.opacity = '1';
-    heading.style.transform = 'translateY(0)';
-    heading.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-  }, 500);
+  // Partikel animieren
+  gsap.fromTo(particles, 
+    { opacity: 0, scale: 0 },
+    { 
+      opacity: 0.3, 
+      scale: 1, 
+      duration: 2, 
+      stagger: 0.02, 
+      ease: "power2.out" 
+    }
+  );
   
-  setTimeout(() => {
-    description.style.opacity = '1';
-    description.style.transform = 'translateY(0)';
-    description.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-  }, 700);
+  // Hero Content staggered animation
+  tl.fromTo(greeting, 
+    { opacity: 0, y: 50, x: -30 },
+    { opacity: 1, y: 0, x: 0, duration: 1, ease: "power3.out" }
+  )
+  .fromTo(heading, 
+    { opacity: 0, y: 60, scale: 0.9 },
+    { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "back.out(1.7)" }, 
+    "-=0.7"
+  )
+  .fromTo(description, 
+    { opacity: 0, y: 40 },
+    { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, 
+    "-=0.8"
+  )
+  .fromTo(cta, 
+    { opacity: 0, y: 30, scale: 0.8 },
+    { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      duration: 0.8, 
+      ease: "back.out(2.5)",
+      onComplete: () => {
+        // Hover animation setup
+        gsap.set(cta, { 
+          transformOrigin: "center" 
+        });
+      }
+    }, 
+    "-=0.6"
+  );
   
-  setTimeout(() => {
-    cta.style.opacity = '1';
-    cta.style.transform = 'translateY(0)';
-    cta.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-  }, 900);
+  // Continuous particle floating animation
+  gsap.to(particles, {
+    y: "random(-20, 20)",
+    x: "random(-10, 10)",
+    duration: "random(3, 6)",
+    ease: "sine.inOut",
+    repeat: -1,
+    yoyo: true,
+    stagger: {
+      amount: 2,
+      from: "random"
+    }
+  });
 };
 
 // Funktion zum Scrollen zu einer Sektion
@@ -192,37 +233,37 @@ onUnmounted(() => {
 
 <style scoped>
 .hero {
-    min-height: 100vh;
+    min-height: var(--viewport-height);
     display: flex;
     align-items: center;
     position: relative;
     overflow: hidden;
-    padding-top: 80px;
-    width: 100%;
+    padding-top: var(--header-height);
+    width: var(--viewport-width);
 }
 
 .hero-content {
     position: relative;
-    z-index: 1;
-    width: 100%;
+    z-index: var(--z-content);
+    width: var(--viewport-width);
     max-width: 800px;
 }
 
 .hero-greeting {
     color: var(--primary);
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 1rem;
+    font-size: var(--font-base);
+    font-weight: var(--font-medium);
+    margin-bottom: var(--spacing-sm);
     opacity: 0;
-    transform: translateY(20px);
+    transform: var(--transform-down);
 }
 
 .hero h1 {
-    font-size: 4rem;
-    margin-bottom: 1.5rem;
+    font-size: var(--font-3xl);
+    margin-bottom: var(--spacing-md);
     line-height: 1.1;
     opacity: 0;
-    transform: translateY(20px);
+    transform: var(--transform-down);
 }
 
 .hero h1 span {
@@ -242,30 +283,30 @@ onUnmounted(() => {
 }
 
 .hero-description {
-    font-size: 1.2rem;
+    font-size: var(--font-base);
     max-width: 600px;
     color: var(--gray);
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
     opacity: 0;
-    transform: translateY(20px);
+    transform: var(--transform-down);
 }
 
 .hero-cta {
     display: inline-block;
-    padding: 0.8rem 2rem;
+    padding: var(--spacing-xs) var(--spacing-lg);
     background-color: var(--primary);
     color: var(--dark);
     text-decoration: none;
-    font-weight: 600;
-    border-radius: 4px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: var(--font-semibold);
+    border-radius: var(--border-radius-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
     opacity: 0;
-    transform: translateY(20px);
+    transform: var(--transform-down);
 }
 
 .hero-cta:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(45, 212, 191, 0.3);
+    transform: var(--transform-up);
+    box-shadow: var(--shadow-sm);
 }
 
 .hero-bg {
@@ -273,34 +314,34 @@ onUnmounted(() => {
     top: 0;
     right: 0;
     width: 60%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.1;
+    height: var(--viewport-width);
+    z-index: var(--z-background);
+    opacity: var(--opacity-disabled);
 }
 
 .hero-particles {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: var(--viewport-width);
+    height: var(--viewport-width);
 }
 
 .particle {
     position: absolute;
     background-color: var(--primary);
-    border-radius: 50%;
-    z-index: 0;
+    border-radius: var(--border-radius-full);
+    z-index: var(--z-background);
 }
 
 /* Responsive Styles */
-@media (max-width: 768px) {
+@media (max-width: var(--breakpoint-tablet)) {
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: var(--font-2xl);
     }
     
     .hero-description {
-        font-size: 1rem;
+        font-size: var(--font-sm);
     }
 }
 </style>
