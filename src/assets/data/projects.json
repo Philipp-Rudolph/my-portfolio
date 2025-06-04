@@ -4,7 +4,7 @@
     "description": "Ein webbasiertes Tool zum Vergleichen von Textdateien und Code mit Syntax-Highlighting und verschiedenen Diff-Algorithmen.",
     "image": "/diff-check.preview.jpg",
     "technologies": ["Vue.js", "JavaScript", "CSS3", "HTML5", "Diff Algorithmen"],
-    "demoLink": "https://diff-check.philipp-rudolph.dev",
+    "demoLink": "https://philipp-rudolph.github.io/diff-check/",
     "codeLink": "#"
   },
   {
