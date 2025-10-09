@@ -24,12 +24,16 @@ async function convertImagesToWebP() {
 
         console.log(`Converting ${file} to ${outputFileName}...`);
 
+        const isPreview = file.includes('.preview');
+        console.log(` - Detected as ${isPreview ? 'preview' : 'standard'} image.`);
+        const resizeOptions = isPreview
+          ? { width: 715, height: 403, fit: 'inside', withoutEnlargement: true }
+          : { width: 1280, height: 1080, fit: 'inside', withoutEnlargement: true };
+        const webpQuality = isPreview ? 70 : 85;
+
         await sharp(inputPath)
-          .resize(1280, 1080, {
-            fit: 'inside',
-            withoutEnlargement: true
-          })
-          .webp({ quality: 85 })
+          .resize(resizeOptions)
+          .webp({ quality: webpQuality })
           .toFile(outputPath);
 
         console.log(`✓ Converted ${file} to ${outputFileName}`);

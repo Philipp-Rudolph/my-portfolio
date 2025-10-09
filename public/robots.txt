@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://philipprudolph.github.io/sitemap.xml
