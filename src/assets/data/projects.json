@@ -1,8 +1,24 @@
 [
   {
+    "title": "Bacchus Weinstube - Website",
+    "description": "Eine ansprechende Website für die Bacchus Weinstube mit Informationen zu Getränken, Veranstaltungen und Reservierungsoptionen.",
+    "image": "/bacchus-weinstube.preview.webp",
+    "technologies": ["Kirby CMS", "PHP", "HTML", "SASS", "JavaScript", "Docker", "nginx"],
+    "demoLink": "https://bacchus.shift-wise.de",
+    "codeLink": "#"
+  },
+  {
+    "title": "Rosa Cocktailbar - Website",
+    "description": "Eine ansprechende Website für die Rosa Cocktailbar mit Informationen zu Getränken, Veranstaltungen und Reservierungsoptionen.",
+    "image": "/rosa-cocktailbar.preview.webp",
+    "technologies": ["Kirby CMS", "PHP", "HTML", "SASS", "JavaScript", "Docker", "nginx"],
+    "demoLink": "https://rosa.shift-wise.de",
+    "codeLink": "#"
+  },
+  {
     "title": "diff-check - Code Vergleichstool",
     "description": "Ein webbasiertes Tool zum Vergleichen von Textdateien und Code mit Syntax-Highlighting und verschiedenen Diff-Algorithmen.",
-    "image": "/diff-check.preview.jpg",
+    "image": "/diff-check.preview.webp",
     "technologies": ["Vue.js", "JavaScript", "CSS3", "HTML5", "Diff Algorithmen"],
     "demoLink": "https://philipp-rudolph.github.io/diff-check/",
     "codeLink": "#"
@@ -10,7 +26,7 @@
   {
     "title": "Waking Up In Stereo - Relaunch",
     "description": "Relaunch der Website für die Band Waking Up In Stereo mit neuem Design und verbesserter Benutzererfahrung.",
-    "image": "/wuis.preview.png",
+    "image": "/wuis.preview.webp",
     "technologies": ["Kirby CMS", "PHP", "HTML", "CSS", "JavaScript", "Docker", "nginx", "umami"],
     "demoLink": "https://www.wakingupinstereo.com",
     "codeLink": "#"
@@ -18,7 +34,7 @@
   {
     "title": "KVB Access - Barrierefreier Nahverkehr",
     "description": "Entwicklung einer Webanwendung zur Unterstützung von Menschen mit Behinderungen bei der Nutzung des öffentlichen Nahverkehrs in Köln.",
-    "image": "/kvb-access.preview.png",
+    "image": "/kvb-access.preview.webp",
     "technologies": ["Vue.js", "Leaflet", "Docker", "nginx", "reverse proxy", "umami"],
     "demoLink": "https://www.kvb-access.de",
     "codeLink": "#"

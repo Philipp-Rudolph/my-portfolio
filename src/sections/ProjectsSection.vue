@@ -40,7 +40,7 @@ const projects = ref(projectsData);
 
 // Fallback für Bilder, die nicht geladen werden können
 const handleImageError = (event) => {
-  event.target.src = '/placeholder.jpg'; // Platzhalter-Bild (erstelle dieses in deinem public-Ordner)
+  event.target.src = '/placeholder.webp'; // Platzhalter-Bild (erstelle dieses in deinem public-Ordner)
 };
 
 // Projektkartenanimation

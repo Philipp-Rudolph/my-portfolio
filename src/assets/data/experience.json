@@ -1,6 +1,12 @@
 [
   {
-    "date": "Mar 2022 - Heute",
+    "date": "Mar 2025 - Heute",
+    "title": "Software Engineer",
+    "company": "Bimanu Cloud Solutions GmbH",
+    "description": "Entwicklung und Wartung von Cloud-basierten BI-Softwarelösungen und KI-Tools. Zusammenarbeit in einem agilen Team zur Implementierung neuer Features und Optimierung bestehender Anwendungen."
+  },
+  {
+    "date": "Mar 2022 - 2025",
     "title": "Junior Web Entwickler",
     "company": "Klickmeister GmbH",
     "description": "Entwicklung und Wartung von Unternehmenswebseiten und Webanwendungen. Implementierung neuer Features und Optimierung der Benutzeroberfläche für verbesserte User Experience."

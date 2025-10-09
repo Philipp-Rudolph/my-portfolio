@@ -4,11 +4,12 @@
       <h2 class="section-title">Über mich</h2>
       <div class="about-content">
         <div class="about-image">
-          <img :src="profileImage" alt="Profilbild" @error="handleImageError">
+          <img :src="profileImage" alt="Profilbild" @error="handleImageError" />
         </div>
         <div class="about-text">
           <p>
-            Ich bin ein leidenschaftlicher Junior Web Entwickler mit {{ new Date().getFullYear() - 2022 }} Jahren Erfahrung im Bereich der Webentwicklung.
+            Ich bin ein leidenschaftlicher Junior Web Entwickler mit {{ new Date().getFullYear() - 2022 }} Jahren
+            Erfahrung im Bereich der Webentwicklung.
             Während meinem Studium habe ich bei Klickmeister meine Karriere begonnen und dort an verschiedenen
             spannenden Projekten gearbeitet.
           </p>
@@ -55,16 +56,16 @@ import { isElementInViewport, animateOnScroll } from '../utils/animations';
 
 // Fallback für Bilder, die nicht geladen werden können
 const handleImageError = (event) => {
-  event.target.src = new URL('/placeholder-image.jpg', import.meta.url).href; // Stelle sicher, dass du dieses Bild hast
+  event.target.src = new URL('/placeholder-image.webp', import.meta.url).href; // Stelle sicher, dass du dieses Bild hast
 };
 
-const profileImage = new URL('/philipp-profile.jpg', import.meta.url).href;
+const profileImage = new URL('/profile-philipp.webp', import.meta.url).href;
 
 // Abschnittsanimation
 const animateAboutSection = () => {
   const aboutImage = document.querySelector('.about-image');
   const aboutText = document.querySelector('.about-text');
-  
+
   if (aboutImage) animateOnScroll(aboutImage);
   if (aboutText) animateOnScroll(aboutText);
 };
@@ -100,7 +101,7 @@ onUnmounted(() => {
   transform: translateY(50px);
   opacity: 0;
   height: 100%;
-  background-color: rgba(45, 212, 191, 0.05); 
+  background-color: rgba(45, 212, 191, 0.05);
 }
 
 .about-image img {
@@ -156,7 +157,7 @@ onUnmounted(() => {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
-  
+
   .about-image {
     max-width: 500px;
     margin: 0 auto;
