@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 
 defineProps({
   scrolled: Boolean

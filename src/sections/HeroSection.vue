@@ -3,7 +3,7 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-greeting">Hallo, ich bin Philipp</div>
-        <h1>Junior Web <br><span class="typing-container"><span ref="typingElement" class="typing-effect"></span></span></h1>
+        <h1>Freelance Web- & Software<br><span class="typing-container"><span ref="typingElement" class="typing-effect"></span></span></h1>
         <div class="hero-description">
           Mit 3 Jahren Erfahrung in der Webentwicklung kreiere ich moderne, responsive und benutzerfreundliche
           Websites und Webanwendungen.
