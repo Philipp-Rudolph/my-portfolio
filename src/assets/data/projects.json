@@ -4,7 +4,7 @@
     "description": "Eine ansprechende Website für die Bacchus Weinstube mit Informationen zu Getränken, Veranstaltungen und Reservierungsoptionen.",
     "image": "/bacchus-weinstube.preview.webp",
     "technologies": ["Kirby CMS", "PHP", "HTML", "SASS", "JavaScript", "Docker", "nginx"],
-    "demoLink": "https://bacchus.shift-wise.de",
+    "demoLink": "https://www.weinstube-bacchus.de",
     "codeLink": "#"
   },
   {
